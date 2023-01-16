@@ -58,6 +58,9 @@ class LastPurchase implements ResolverInterface
         array $args = null
     )
     {
+        $writer = new \Zend_Log_Writer_Stream(BP . '/var/log/temp1.log');
+        $logger = new \Zend_Log();
+        $logger->addWriter($writer);
         if (empty($args['email'])) {
             throw new GraphQlInputException(__('Email must be specified'));
         }
@@ -68,11 +71,12 @@ class LastPurchase implements ResolverInterface
 
         try {
             $latestOrderItems = $this->customerOrder->getLatestOrder($args["email"]);
+//            $logger->info(var_dump($latestOrderItems));
         } catch (NoSuchEntityException $exception) {
             throw new NoSuchEntityException(__($exception->getMessage()));
         }
 
-        return $latestOrderItems;
+        return $latestOrderItems[0];
 
     }
 
