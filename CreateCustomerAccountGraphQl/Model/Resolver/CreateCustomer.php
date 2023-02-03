@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Sigma\CreateCustomerAccountGraphQl\Model\Resolver;
+namespace Task\CreateCustomerAccountGraphQl\Model\Resolver;
 
 use Magento\CustomerGraphQl\Model\Customer\CreateCustomerAccount;
 use Magento\CustomerGraphQl\Model\Customer\ExtractCustomerData;
@@ -77,9 +77,13 @@ class CreateCustomer implements ResolverInterface
         if (isset($args['input']['date_of_birth'])) {
             $args['input']['dob'] = $args['input']['date_of_birth'];
         }
-        //
+        //Adding customer number attribute to customer data
         if (isset($args['customer_number'])) {
             $args['input']['customer_number'] = $args['customer_number'];
+        }
+        //Adding customer company name attribute to customer data
+        if (isset($args['customer_company_name'])) {
+            $args['input']['customer_company_name'] = $args['customer_company_name'];
         }
         $customer = $this->createCustomerAccount->execute(
             $args['input'],

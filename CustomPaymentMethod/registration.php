@@ -8,4 +8,4 @@
 
 use Magento\Framework\Component\ComponentRegistrar;
 
-ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Task_CreateCustomerAccountGraphQl', __DIR__);
+ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Task_CustomPaymentMethod', __DIR__);
